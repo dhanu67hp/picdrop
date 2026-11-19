@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-const API = "http://localhost:5001";
+const API = "https://picdrop-sobo.onrender.com";
 const MAX_PHOTOS = 8;
 
 function drawCover(ctx, image, x, y, width, height) {

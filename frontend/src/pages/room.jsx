@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 
-const API = "http://localhost:5001";
+const API = "https://picdrop-sobo.onrender.com";
 
 const formatFile = (file) => ({
   id: file.id,

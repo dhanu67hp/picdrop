@@ -20,7 +20,7 @@ function CreateRoom() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5001/api/rooms", {
+        const response = await fetch("https://picdrop-sobo.onrender.com/api/rooms", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

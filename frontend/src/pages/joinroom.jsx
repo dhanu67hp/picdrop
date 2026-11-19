@@ -1,48 +1,48 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function JoinRoom() {
   const [roomCode, setRoomCode] = useState("");
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const joinRoom = async () => {
     const code = roomCode.trim().toUpperCase();
-    const name = username.trim();
 
-    if (!name) {
-      setError("Please enter your username.");
+    if (code.length !== 8) {
+      alert("Please enter a valid 8-character room code");
       return;
     }
 
-    if (code.length !== 8) {
-      setError("Please enter a valid 8-character room code.");
+    if (!username.trim()) {
+      alert("Please enter your username");
       return;
     }
 
     setLoading(true);
-    setError("");
 
     try {
       const response = await fetch(
-        `http://localhost:5001/api/rooms/${code}`
+        `https://picdrop-sobo.onrender.com/api/rooms/${code}`
       );
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Room not found.");
+        alert(data.message || "Room not found");
+        return;
       }
 
       navigate(
-        `/room?roomCode=${encodeURIComponent(data.roomId)}&roomName=Room&username=${encodeURIComponent(name)}`
+        `/room?roomCode=${encodeURIComponent(data.roomId)}&roomName=Room&username=${encodeURIComponent(username.trim())}`
       );
-    } catch (err) {
-      setError(err.message || "Cannot connect to server.");
+
+    } catch (error) {
+      alert("Cannot connect to server. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -50,45 +50,30 @@ function JoinRoom() {
 
   return (
     <div className="join-room">
-      <div className="join-room-container">
+      <h1>Join a Room</h1>
 
-        <span className="section-label">COME BACK TO YOUR PEOPLE</span>
+      <p>Enter the 8-character room code</p>
 
-        <h1>Join a Room</h1>
+      <input
+        type="text"
+        placeholder="Enter room code"
+        maxLength={8}
+        value={roomCode}
+        onChange={(e) =>
+          setRoomCode(e.target.value.toUpperCase())
+        }
+      />
 
-        <p>
-          Enter your details and reconnect with your friends.
-        </p>
+      <input
+        type="text"
+        placeholder="Enter your username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
 
-        <input
-          className="join-code-input"
-          type="text"
-          placeholder="8-CHARACTER ROOM CODE"
-          maxLength={8}
-          value={roomCode}
-          onChange={(e) =>
-            setRoomCode(e.target.value.toUpperCase())
-          }
-          disabled={loading}
-        />
-
-        <input
-          className="join-username-input"
-          type="text"
-          placeholder="Enter your username"
-          maxLength={25}
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          disabled={loading}
-        />
-
-        {error && <p className="form-error">{error}</p>}
-
-        <button onClick={joinRoom} disabled={loading}>
-          {loading ? "Joining Room..." : "Join Room →"}
-        </button>
-
-      </div>
+      <button onClick={joinRoom} disabled={loading}>
+        {loading ? "Joining..." : "Join Room"}
+      </button>
     </div>
   );
 }
