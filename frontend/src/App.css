@@ -1,0 +1,2912 @@
+
+/* =========================================================
+   PICKDROP — ROOM WORKSPACE
+   Cinematic Dark UI
+   Load index.css BEFORE this file.
+========================================================= */
+
+
+/* =========================================================
+   1. SHARED GLASS SURFACES
+========================================================= */
+
+.room-header,
+.room-tabs,
+.room-content,
+.online-users-section,
+.video-call-panel,
+.collage-photo-picker,
+.collage-preview-panel,
+.collage-layout-options,
+.media-modal-content {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow:
+    0 30px 80px -24px rgba(0, 0, 0, 0.75),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.room-header,
+.room-content,
+.video-call-panel {
+  border-radius: var(--r-lg);
+}
+
+.online-users-section,
+.collage-photo-picker,
+.collage-preview-panel,
+.collage-layout-options,
+.room-tabs {
+  border-radius: var(--r-md);
+}
+
+
+/* =========================================================
+   2. PAGE AND HEADER
+========================================================= */
+
+.room-page {
+  width: 100%;
+  max-width: 1250px;
+  min-height: 100vh;
+  margin: auto;
+  padding: 25px;
+  color: var(--text);
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 22px 26px;
+  margin-bottom: 6px;
+}
+
+.room-header h1 {
+  margin-bottom: 6px;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 800;
+  background: linear-gradient(
+    100deg,
+    #fff,
+    var(--violet-2) 60%,
+    var(--ember)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.room-header p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.room-header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.room-code {
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line);
+  color: var(--ember);
+  font: 700 13px var(--font-display);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 14px rgba(255, 176, 103, 0.55);
+}
+
+.home-button,
+.upload-content button,
+.chat-input-area button,
+.join-call-button,
+.collage-download-button,
+.btn-download-media {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 22px;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, var(--violet), #5a3fe0);
+  box-shadow:
+    0 10px 30px -8px rgba(124, 92, 255, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.home-button:hover,
+.upload-content button:hover,
+.chat-input-area button:hover,
+.join-call-button:hover,
+.collage-download-button:hover,
+.btn-download-media:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -8px rgba(124, 92, 255, 0.95);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.room-info-bar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 14px 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.room-timer {
+  position: fixed;
+  top: 88px;
+  left: 50%;
+  z-index: 1000;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(13, 10, 26, 0.85);
+  border: 1px solid rgba(165, 139, 255, 0.35);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(15px);
+  box-shadow: var(--glow);
+}
+
+
+/* =========================================================
+   3. ROOM TABS AND CONTENT
+========================================================= */
+
+.room-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  margin: 10px 0 20px;
+  overflow-x: auto;
+}
+
+.room-tabs button {
+  flex: 1;
+  min-width: 120px;
+  padding: 13px 18px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.room-tabs button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.room-tabs button.active {
+  background: rgba(124, 92, 255, 0.2);
+  color: #fff;
+  box-shadow: inset 0 -2px var(--violet), var(--glow);
+}
+
+.room-content {
+  min-height: 450px;
+  padding: 24px;
+}
+
+.section-heading,
+.gallery-header,
+.collage-heading,
+.video-call-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.section-heading h2,
+.gallery-header h2,
+.collage-heading h2,
+.video-call-heading h2 {
+  margin: 0 0 6px;
+  font-size: 23px;
+}
+
+.section-heading p,
+.gallery-header span,
+.collage-heading p,
+.video-call-heading p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.chat-online-count,
+.call-participant-count,
+.collage-count {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(61, 220, 151, 0.1);
+  color: var(--live);
+  border: 1px solid rgba(61, 220, 151, 0.25);
+}
+
+.collage-count {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  border-color: var(--line);
+}
+
+.collage-eyebrow {
+  color: var(--ember);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   4. ONLINE USERS AND MEMBERS
+========================================================= */
+
+.online-users-section {
+  padding: 22px;
+  margin: 20px 0;
+}
+
+.online-users-section h3 {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.online-users-list,
+.members-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.members-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.online-user,
+.member-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 155px;
+  padding: 12px 16px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  transition: border-color 0.2s;
+}
+
+.online-user:hover,
+.member-card:hover {
+  border-color: var(--violet);
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-weight: 800;
+  color: #fff;
+  background: conic-gradient(
+    var(--violet),
+    var(--rose),
+    var(--ember),
+    var(--violet)
+  );
+  box-shadow: 0 0 18px rgba(124, 92, 255, 0.45);
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-details strong {
+  font-size: 13px;
+}
+
+.user-details span {
+  color: var(--live);
+  font-size: 11px;
+}
+
+.online-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 10px var(--live);
+}
+
+
+/* =========================================================
+   5. UPLOAD SECTION
+========================================================= */
+
+.upload-box {
+  padding: 48px 22px;
+  margin-bottom: 30px;
+  text-align: center;
+  border: 2px dashed rgba(165, 139, 255, 0.4);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(124, 92, 255, 0.18),
+      transparent 65%
+    ),
+    rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+}
+
+.upload-box:hover {
+  border-color: var(--violet-2);
+  box-shadow: var(--glow);
+}
+
+.upload-icon {
+  font-size: 44px;
+  filter: drop-shadow(0 0 16px rgba(124, 92, 255, 0.7));
+}
+
+.upload-content h3 {
+  margin: 10px 0;
+}
+
+.upload-content p {
+  margin: 10px 0;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.upload-content small {
+  color: var(--muted);
+}
+
+.upload-content button {
+  margin: 12px 0;
+}
+
+
+/* =========================================================
+   6. GALLERY
+   Supports both .gallery-grid and .pc-gallery-grid
+========================================================= */
+
+.gallery-grid,
+.pc-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  align-items: start;
+  gap: 16px;
+  width: 100%;
+}
+
+.media-card,
+.pc-gallery-card {
+  position: relative;
+  min-width: 0;
+  padding: 10px;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--line);
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+
+.media-card:hover,
+.pc-gallery-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(165, 139, 255, 0.6);
+  box-shadow: 0 20px 50px -16px rgba(124, 92, 255, 0.6);
+}
+
+.media-preview-button,
+.pc-gallery-preview {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 150px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 12px;
+  background: var(--abyss);
+  cursor: pointer;
+}
+
+.media-preview-button::after,
+.pc-gallery-preview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.45),
+    transparent 55%
+  );
+}
+
+.media-card img,
+.media-card video,
+.pc-gallery-thumb {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s;
+}
+
+.media-card:hover img,
+.media-card:hover video,
+.pc-gallery-card:hover .pc-gallery-thumb {
+  transform: scale(1.05);
+}
+
+.video-thumbnail,
+.pc-gallery-video-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding-left: 4px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  background: rgba(124, 92, 255, 0.85);
+  box-shadow: var(--glow);
+}
+
+.media-file-name {
+  margin: 10px 0 4px;
+  padding: 0 2px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.media-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 6px 0 0;
+}
+
+.media-actions button,
+.media-actions a {
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.media-actions button:hover,
+.media-actions a:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.media-actions .btn-download-media {
+  padding: 7px 10px;
+  font-size: 11px;
+  box-shadow: none;
+  background: rgba(124, 92, 255, 0.25);
+  color: var(--violet-2);
+  border: 1px solid rgba(165, 139, 255, 0.35);
+}
+
+.media-actions .btn-delete-media {
+  position: static;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  color: #ff9db7;
+  background: rgba(255, 93, 143, 0.12);
+  border: 1px solid rgba(255, 93, 143, 0.3);
+}
+
+.empty-gallery,
+.empty-chat {
+  grid-column: 1 / -1;
+  width: 100%;
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: var(--r-md);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.empty-gallery div,
+.empty-chat div {
+  font-size: 40px;
+}
+
+
+/* =========================================================
+   7. CHAT
+========================================================= */
+
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 520px;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.chat-header h2 {
+  font-size: 20px;
+}
+
+.chat-header span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 320px;
+  max-height: 480px;
+  margin-top: 14px;
+  padding: 18px;
+  overflow-y: auto;
+  border-radius: var(--r-md);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--line);
+  scrollbar-width: thin;
+  scrollbar-color: #2a2250 transparent;
+}
+
+.chat-message {
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 75%;
+  padding: 11px 15px;
+  overflow-wrap: anywhere;
+  border-radius: 18px 18px 18px 4px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.chat-message strong {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 12px;
+  color: var(--ember);
+}
+
+.chat-message p {
+  margin: 4px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.chat-message small {
+  display: block;
+  text-align: right;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.chat-message.my-message,
+.my-message {
+  align-self: flex-end;
+  margin-left: auto;
+  border: 0;
+  border-radius: 18px 18px 4px 18px;
+  background: linear-gradient(135deg, var(--violet), #5a3fe0);
+  box-shadow: 0 10px 26px -10px rgba(124, 92, 255, 0.8);
+}
+
+.my-message strong {
+  color: #fff;
+}
+
+.my-message small {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.typing-indicator {
+  padding: 8px 6px;
+  color: var(--violet-2);
+  font-size: 12px;
+  font-style: italic;
+  animation: fade 1.2s infinite;
+}
+
+@keyframes fade {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.chat-input-area,
+.composer {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  outline: 0;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--text);
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.chat-input-area input::placeholder {
+  color: var(--muted);
+}
+
+.chat-input-area input:focus {
+  border-color: var(--violet-2);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.25);
+}
+
+
+/* =========================================================
+   8. VIDEO CALL
+========================================================= */
+
+.video-call-panel {
+  width: 100%;
+  min-height: 450px;
+  padding: 26px;
+}
+
+.call-start-screen,
+.video-call-panel > .video-call-icon {
+  display: flex;
+}
+
+.call-start-screen {
+  min-height: 350px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 26px;
+  text-align: center;
+  border-radius: var(--r-md);
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(124, 92, 255, 0.22),
+      transparent 65%
+    ),
+    rgba(0, 0, 0, 0.3);
+}
+
+.video-call-icon {
+  margin-bottom: 14px;
+  font-size: 56px;
+  filter: drop-shadow(0 0 20px rgba(124, 92, 255, 0.7));
+}
+
+.call-start-screen p,
+.video-call-panel p {
+  max-width: 430px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.call-status-text,
+.video-call-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.video-call-status {
+  padding: 12px 18px;
+  margin: 12px 0;
+  border-radius: 10px;
+  color: var(--ember);
+  background: rgba(255, 176, 103, 0.1);
+}
+
+.call-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--live);
+  background: rgba(61, 220, 151, 0.08);
+  border: 1px solid rgba(61, 220, 151, 0.2);
+}
+
+.call-live-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--live);
+  box-shadow: 0 0 12px var(--live);
+  animation: fade 1.5s infinite;
+}
+
+.call-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.call-video-card,
+.call-waiting-card {
+  position: relative;
+  min-height: 230px;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: radial-gradient(circle at 50% 35%, #3a2d7a, var(--ink) 75%);
+}
+
+.call-video-card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.call-video-name {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.camera-off-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background: var(--panel);
+}
+
+.call-waiting-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  border-style: dashed;
+}
+
+.call-waiting-card div {
+  font-size: 34px;
+}
+
+.call-waiting-card h3 {
+  margin-bottom: 4px;
+  color: var(--text);
+}
+
+.call-waiting-card p {
+  font-size: 13px;
+}
+
+.call-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.call-control,
+.leave-call-button {
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.call-control {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--line);
+}
+
+.call-control:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.call-control.active {
+  color: var(--ember);
+  background: rgba(255, 176, 103, 0.14);
+  border-color: rgba(255, 176, 103, 0.4);
+}
+
+.leave-call-button {
+  border: 0;
+  color: #fff;
+  background: var(--rose);
+  box-shadow: 0 10px 30px -8px rgba(255, 93, 143, 0.8);
+}
+
+
+/* =========================================================
+   9. COLLAGE MAKER
+========================================================= */
+
+.collage-maker {
+  width: 100%;
+  color: var(--text);
+}
+
+.collage-layout-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.collage-layout-options > span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.collage-layout-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.collage-layout-buttons button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--line);
+}
+
+.collage-layout-buttons button.selected {
+  color: #fff;
+  border-color: transparent;
+  background: var(--violet);
+  box-shadow: var(--glow);
+}
+
+.collage-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 20px;
+}
+
+.collage-photo-picker,
+.collage-preview-panel {
+  min-width: 0;
+  padding: 18px;
+}
+
+.collage-picker-heading,
+.collage-preview-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.collage-picker-heading h3,
+.collage-preview-heading h3 {
+  font-size: 15px;
+}
+
+.collage-picker-heading span,
+.collage-preview-heading span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.collage-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.collage-photo-option {
+  position: relative;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: var(--panel);
+  transition: transform 0.2s;
+}
+
+.collage-photo-option:hover {
+  transform: scale(1.04);
+}
+
+.collage-photo-option img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collage-photo-option.is-selected {
+  border-color: var(--ember);
+  box-shadow: 0 0 18px rgba(255, 176, 103, 0.45);
+}
+
+.collage-photo-check {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(6, 5, 12, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.is-selected .collage-photo-check {
+  background: var(--violet);
+  border-color: var(--violet-2);
+}
+
+.collage-empty,
+.collage-preview-empty {
+  text-align: center;
+  color: var(--muted);
+}
+
+.collage-empty {
+  grid-column: 1 / -1;
+  padding: 44px 10px;
+}
+
+.collage-empty span,
+.collage-preview-empty > span {
+  font-size: 35px;
+}
+
+.collage-preview {
+  display: grid;
+  gap: 7px;
+  padding: 8px;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.collage-preview.grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 1;
+}
+
+.collage-preview.portrait {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  aspect-ratio: 9 / 16;
+  max-height: 580px;
+  margin: auto;
+}
+
+.collage-preview.strip {
+  grid-template-columns: repeat(var(--collage-count, 3), minmax(0, 1fr));
+  aspect-ratio: 1800 / 650;
+}
+
+.collage-preview-item {
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.collage-preview-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collage-preview-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 20px;
+  border-radius: var(--r-md);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.collage-preview-empty h3 {
+  color: var(--text);
+  font-size: 15px;
+}
+
+.collage-preview-empty p {
+  font-size: 12px;
+}
+
+.collage-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.collage-actions button {
+  flex: 1;
+  min-width: 130px;
+  padding: 12px;
+  font-size: 12px;
+}
+
+.collage-save-button {
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--line);
+}
+
+.collage-message {
+  margin-top: 12px;
+  color: var(--live);
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   10. MEDIA PREVIEW MODAL
+========================================================= */
+
+.media-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 2, 8, 0.92);
+  backdrop-filter: blur(14px);
+}
+
+.media-modal-content {
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  padding: 18px;
+  overflow: auto;
+  border-radius: var(--r-lg);
+}
+
+.media-modal-header,
+.media-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.media-modal-footer {
+  justify-content: flex-end;
+  margin: 14px 0 0;
+}
+
+.media-modal-header h3 {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.media-modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  max-height: 65vh;
+}
+
+.media-modal-body img,
+.media-modal-body video {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.media-modal-header button,
+.media-modal-footer button,
+.close-media-modal {
+  padding: 9px 14px;
+  cursor: pointer;
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--line);
+}
+
+.close-media-modal {
+  color: #ff9db7;
+  background: rgba(255, 93, 143, 0.12);
+  border-color: rgba(255, 93, 143, 0.3);
+}
+
+
+/* =========================================================
+   11. ERROR MESSAGES
+========================================================= */
+
+.room-error,
+.room-page > p[style*="color: red"] {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  color: #ffb4c8 !important;
+  font-size: 13px;
+  background: rgba(255, 93, 143, 0.1);
+  border: 1px solid rgba(255, 93, 143, 0.3);
+}
+
+.room-error button {
+  color: #fff;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   12. RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 800px) {
+  .collage-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .collage-photo-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .room-page {
+    padding: 12px;
+  }
+
+  .room-header {
+    padding: 16px;
+  }
+
+  .room-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .room-timer {
+    position: static;
+    width: fit-content;
+    margin: 0 auto 18px;
+    transform: none;
+  }
+
+  .room-tabs button {
+    min-width: 105px;
+    padding: 12px 9px;
+    font-size: 13px;
+  }
+
+  .room-content {
+    padding: 14px;
+  }
+
+  .gallery-grid,
+  .pc-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .media-preview-button,
+  .pc-gallery-preview {
+    height: 125px;
+  }
+
+  .chat-message {
+    max-width: 90%;
+  }
+
+  .chat-input-area button {
+    padding: 12px 16px;
+  }
+
+  .call-video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .call-control,
+  .leave-call-button {
+    padding: 11px 14px;
+    font-size: 12px;
+  }
+
+  .video-call-panel {
+    padding: 16px;
+  }
+
+  .video-call-heading {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .collage-photo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .collage-layout-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .media-modal {
+    padding: 8px;
+  }
+}
+
+/* =========================================================
+   PICKDROP — WARM ORANGE DASHBOARD OVERRIDES
+   Replaces remaining purple accents.
+========================================================= */
+
+/* Primary buttons */
+
+.home-button,
+.upload-content button,
+.chat-input-area button,
+.join-call-button,
+.collage-download-button,
+.btn-download-media {
+  background: linear-gradient(
+    135deg,
+    #ff963f,
+    #d96b25
+  );
+
+  box-shadow:
+    0 10px 30px -8px rgba(255, 138, 50, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.home-button:hover,
+.upload-content button:hover,
+.chat-input-area button:hover,
+.join-call-button:hover,
+.collage-download-button:hover,
+.btn-download-media:hover {
+  box-shadow: 0 16px 40px -8px rgba(255, 138, 50, 0.6);
+}
+
+/* Room timer */
+
+.room-timer {
+  background: rgba(20, 12, 6, 0.9);
+  border-color: rgba(255, 160, 75, 0.35);
+}
+
+/* Active room tab */
+
+.room-tabs button.active {
+  background: rgba(255, 138, 50, 0.15);
+  box-shadow:
+    inset 0 -2px #ff963f,
+    0 0 22px rgba(255, 138, 50, 0.15);
+}
+
+/* Online members */
+
+.online-user:hover,
+.member-card:hover {
+  border-color: var(--violet);
+}
+
+.user-avatar {
+  background: conic-gradient(
+    #ff8a32,
+    #ffc078,
+    #d96b25,
+    #ff8a32
+  );
+
+  box-shadow: 0 0 18px rgba(255, 138, 50, 0.35);
+}
+
+/* Upload section */
+
+.upload-box {
+  border-color: rgba(255, 160, 75, 0.4);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 138, 50, 0.16),
+      transparent 65%
+    ),
+    rgba(0, 0, 0, 0.3);
+}
+
+.upload-box:hover {
+  border-color: var(--violet-2);
+}
+
+.upload-icon {
+  filter: drop-shadow(0 0 16px rgba(255, 138, 50, 0.55));
+}
+
+/* Gallery */
+
+.media-card:hover,
+.pc-gallery-card:hover {
+  border-color: rgba(255, 160, 75, 0.55);
+
+  box-shadow:
+    0 20px 50px -16px rgba(255, 138, 50, 0.25);
+}
+
+.play-icon {
+  background: rgba(255, 138, 50, 0.9);
+  box-shadow: var(--glow);
+}
+
+.media-actions .btn-download-media {
+  background: rgba(255, 138, 50, 0.15);
+  color: var(--violet-2);
+  border-color: rgba(255, 160, 75, 0.35);
+}
+
+/* Chat */
+
+.chat-messages {
+  scrollbar-color: #75401f transparent;
+}
+
+.chat-message.my-message,
+.my-message {
+  background: linear-gradient(
+    135deg,
+    #ff963f,
+    #c45b20
+  );
+
+  box-shadow: 0 10px 26px -10px rgba(255, 138, 50, 0.45);
+}
+
+.typing-indicator {
+  color: var(--violet-2);
+}
+
+.chat-input-area input:focus {
+  border-color: var(--violet-2);
+  box-shadow: 0 0 0 3px rgba(255, 138, 50, 0.18);
+}
+
+/* Video call */
+
+.call-start-screen {
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      rgba(255, 138, 50, 0.16),
+      transparent 65%
+    ),
+    rgba(0, 0, 0, 0.3);
+}
+
+.video-call-icon {
+  filter: drop-shadow(0 0 20px rgba(255, 138, 50, 0.5));
+}
+
+.call-video-card,
+.call-waiting-card {
+  background: radial-gradient(
+    circle at 50% 35%,
+    #59351d,
+    var(--ink) 75%
+  );
+}
+
+.call-control.active {
+  color: var(--ember);
+  background: rgba(255, 176, 103, 0.14);
+  border-color: rgba(255, 176, 103, 0.4);
+}
+
+/* Collage maker */
+
+.collage-layout-buttons button.selected {
+  background: linear-gradient(
+    135deg,
+    #ff963f,
+    #d96b25
+  );
+
+  box-shadow: var(--glow);
+}
+
+.collage-photo-option.is-selected {
+  border-color: var(--ember);
+  box-shadow: 0 0 18px rgba(255, 176, 103, 0.4);
+}
+
+.is-selected .collage-photo-check {
+  background: var(--violet);
+  border-color: var(--violet-2);
+}
+
+/* Error messages remain red for clarity */
+
+.room-error,
+.room-page > p[style*="color: red"] {
+  color: #ffb4a8 !important;
+  background: rgba(255, 75, 55, 0.1);
+  border-color: rgba(255, 100, 75, 0.3);
+}
+
+/* =========================================
+   PICKDROP — PREMIUM GALLERY
+========================================= */
+
+.upload-box {
+  position: relative;
+  overflow: hidden;
+  padding: 55px 25px;
+  margin-bottom: 35px;
+  border: 1px dashed rgba(255, 160, 75, 0.45);
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 138, 50, 0.16),
+      transparent 65%
+    ),
+    rgba(20, 12, 7, 0.7);
+
+  transition: 0.3s ease;
+}
+
+.upload-box:hover {
+  border-color: #ffad55;
+  box-shadow: 0 12px 45px rgba(255, 138, 50, 0.12);
+  transform: translateY(-3px);
+}
+
+.upload-content {
+  text-align: center;
+}
+
+.upload-icon {
+  font-size: 42px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 15px rgba(255, 138, 50, 0.5));
+}
+
+.upload-content h3 {
+  color: #fff4e9;
+  font-family: var(--font-display);
+  font-size: 21px;
+}
+
+.upload-content p {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 9px 0 20px;
+}
+
+.upload-content button {
+  padding: 13px 25px;
+  border: none;
+  border-radius: 30px;
+  color: #1a0e06;
+  background: linear-gradient(135deg, #ffc078, #ff8735);
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.upload-content button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(255, 138, 50, 0.35);
+}
+
+.upload-content small {
+  display: block;
+  margin-top: 17px;
+  color: #8f7d6c;
+  font-size: 11px;
+}
+
+/* GALLERY HEADING */
+
+.gallery-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 35px 0 20px;
+}
+
+.gallery-header h2 {
+  color: #fff4e9;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.gallery-header span {
+  color: #ffbd78;
+  font-size: 12px;
+  padding: 7px 13px;
+  background: rgba(255, 138, 50, 0.1);
+  border: 1px solid rgba(255, 160, 75, 0.2);
+  border-radius: 20px;
+}
+
+/* GALLERY GRID */
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.media-card {
+  overflow: hidden;
+  background: rgba(28, 18, 11, 0.85);
+  border: 1px solid rgba(255, 160, 75, 0.13);
+  border-radius: 16px;
+  transition: 0.3s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 160, 75, 0.5);
+  box-shadow: 0 15px 35px rgba(255, 138, 50, 0.13);
+}
+
+.media-preview-button {
+  display: block;
+  width: 100%;
+  height: 190px;
+  padding: 0;
+  overflow: hidden;
+  background: #100b07;
+  border: none;
+  cursor: pointer;
+}
+
+.media-preview-button img,
+.video-thumbnail video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.media-card:hover .media-preview-button img,
+.media-card:hover .video-thumbnail video {
+  transform: scale(1.05);
+}
+
+.media-file-name {
+  padding: 12px 14px 5px;
+  color: #eee0d2;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* EMPTY GALLERY */
+
+.empty-gallery {
+  grid-column: 1 / -1;
+  padding: 55px 20px;
+  text-align: center;
+  background: rgba(255, 138, 50, 0.035);
+  border: 1px dashed rgba(255, 160, 75, 0.2);
+  border-radius: 18px;
+}
+
+.empty-gallery div {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.empty-gallery h3 {
+  color: #fff4e9;
+}
+
+.empty-gallery p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .upload-box {
+    padding: 38px 15px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .media-preview-button {
+    height: 145px;
+  }
+}
+
+/* =========================================
+   PICKDROP — CINEMATIC CHAT DESIGN
+========================================= */
+
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  min-height: 550px;
+  padding: 22px;
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(255, 138, 50, 0.08),
+      transparent 45%
+    ),
+    rgba(15, 10, 7, 0.65);
+  border: 1px solid rgba(255, 160, 75, 0.13);
+  border-radius: 18px;
+}
+
+.chat-section .section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 160, 75, 0.12);
+}
+
+.chat-section .section-heading h2 {
+  color: #fff4e9;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.chat-section .section-heading p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.chat-online-count {
+  padding: 8px 13px;
+  color: #ffc078;
+  background: rgba(255, 138, 50, 0.1);
+  border: 1px solid rgba(255, 160, 75, 0.22);
+  border-radius: 20px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* CHAT MESSAGES */
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+  min-height: 330px;
+  max-height: 470px;
+  overflow-y: auto;
+  padding: 22px 8px;
+}
+
+.chat-message {
+  align-self: flex-start;
+  max-width: 75%;
+  padding: 13px 16px;
+  color: #f8eee5;
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 160, 75, 0.13);
+  border-radius: 15px 15px 15px 4px;
+  overflow-wrap: anywhere;
+}
+
+.chat-message strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #ffc078;
+  font-size: 12px;
+}
+
+.chat-message p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.chat-message small {
+  display: block;
+  margin-top: 8px;
+  color: #a99b8c;
+  font-size: 10px;
+  text-align: right;
+}
+
+.chat-message.my-message {
+  align-self: flex-end;
+  color: #1a0e06;
+  background: linear-gradient(135deg, #ffc078, #e77a32);
+  border: none;
+  border-radius: 15px 15px 4px 15px;
+}
+
+.chat-message.my-message strong,
+.chat-message.my-message small {
+  color: rgba(26, 14, 6, 0.75);
+}
+
+/* EMPTY CHAT */
+
+.empty-chat {
+  margin: auto;
+  text-align: center;
+  padding: 35px 15px;
+}
+
+.empty-chat div {
+  font-size: 38px;
+  margin-bottom: 12px;
+}
+
+.empty-chat h3 {
+  color: #fff4e9;
+}
+
+.empty-chat p {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* TYPING */
+
+.typing-indicator {
+  padding: 5px 10px 12px;
+  color: #ffbd78;
+  font-size: 12px;
+}
+
+/* CHAT INPUT */
+
+.chat-input-area {
+  display: flex;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 160, 75, 0.13);
+}
+
+.chat-input-area input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 17px;
+  color: #fff4e9;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 160, 75, 0.2);
+  border-radius: 30px;
+  outline: none;
+}
+
+.chat-input-area input:focus {
+  border-color: #ffad55;
+  box-shadow: 0 0 0 3px rgba(255, 138, 50, 0.1);
+}
+
+.chat-input-area input::placeholder {
+  color: #8f7d6c;
+}
+
+.chat-input-area button {
+  padding: 12px 22px;
+  color: #1a0e06;
+  background: linear-gradient(135deg, #ffc078, #ff8735);
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.chat-input-area button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 22px rgba(255, 138, 50, 0.3);
+}
+
+.chat-input-area button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .chat-section {
+    padding: 14px;
+  }
+
+  .chat-message {
+    max-width: 90%;
+  }
+
+  .chat-input-area {
+    gap: 7px;
+  }
+
+  .chat-input-area button {
+    padding: 11px 15px;
+  }
+}
+
+/* =========================================
+   PICKDROP — CINEMATIC VIDEO CALL
+========================================= */
+
+.video-call-panel {
+  padding: 24px;
+  min-height: 500px;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 138, 50, 0.12),
+      transparent 55%
+    ),
+    rgba(15, 10, 7, 0.7);
+  border: 1px solid rgba(255, 160, 75, 0.14);
+  border-radius: 20px;
+}
+
+/* HEADING */
+
+.video-call-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 160, 75, 0.13);
+}
+
+.video-call-heading h2 {
+  color: #fff4e9;
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+
+.video-call-heading p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.call-participant-count {
+  padding: 9px 14px;
+  color: #ffc078;
+  background: rgba(255, 138, 50, 0.1);
+  border: 1px solid rgba(255, 160, 75, 0.2);
+  border-radius: 25px;
+  font-size: 12px;
+}
+
+/* START SCREEN */
+
+.call-start-screen {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 20px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 138, 50, 0.13),
+      transparent 65%
+    );
+}
+
+.video-call-icon {
+  width: 85px;
+  height: 85px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 22px;
+  font-size: 40px;
+  background: rgba(255, 138, 50, 0.12);
+  border: 1px solid rgba(255, 160, 75, 0.25);
+  border-radius: 25px;
+  filter: drop-shadow(0 0 20px rgba(255, 138, 50, 0.25));
+}
+
+.call-start-screen h2 {
+  color: #fff4e9;
+  font-family: var(--font-display);
+  font-size: 27px;
+}
+
+.call-start-screen p {
+  max-width: 420px;
+  margin: 10px 0 25px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.join-call-button {
+  padding: 14px 28px;
+  color: #1a0e06;
+  background: linear-gradient(135deg, #ffc078, #ff8735);
+  border: none;
+  border-radius: 30px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.join-call-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 138, 50, 0.3);
+}
+
+.call-status-text {
+  margin-top: 18px;
+  color: #a99b8c;
+  font-size: 12px;
+}
+
+/* LIVE STATUS */
+
+.call-status-bar {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 0;
+  color: #ffc078;
+  font-size: 13px;
+}
+
+.call-live-dot {
+  width: 9px;
+  height: 9px;
+  background: #3ddc97;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(61, 220, 151, 0.6);
+}
+
+/* VIDEO GRID */
+
+.call-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.call-video-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+  background: #080604;
+  border: 1px solid rgba(255, 160, 75, 0.22);
+  border-radius: 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.call-video-card video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 250px;
+  object-fit: cover;
+}
+
+.call-video-name {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 8px 13px;
+  color: white;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  font-size: 12px;
+  backdrop-filter: blur(10px);
+}
+
+/* WAITING CARD */
+
+.call-waiting-card {
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  text-align: center;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 138, 50, 0.15),
+    rgba(10, 7, 5, 0.9) 75%
+  );
+  border: 1px dashed rgba(255, 160, 75, 0.3);
+  border-radius: 18px;
+}
+
+.call-waiting-card div {
+  font-size: 35px;
+  margin-bottom: 12px;
+}
+
+.call-waiting-card h3 {
+  color: #fff4e9;
+}
+
+.call-waiting-card p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* CAMERA OFF */
+
+.camera-off-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #ffc078;
+  background: #120c07;
+  font-size: 18px;
+}
+
+/* CALL CONTROLS */
+
+.call-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  padding: 22px 10px 5px;
+}
+
+.call-control,
+.leave-call-button {
+  padding: 13px 20px;
+  color: #f8eee5;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 160, 75, 0.2);
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.call-control:hover {
+  background: rgba(255, 138, 50, 0.17);
+  border-color: #ffad55;
+}
+
+.call-control.active {
+  color: #ffc078;
+  background: rgba(255, 138, 50, 0.15);
+  border-color: #ffad55;
+}
+
+.leave-call-button {
+  color: white;
+  background: #c84435;
+  border-color: #e75b49;
+}
+
+.leave-call-button:hover {
+  background: #e04c3b;
+  transform: translateY(-2px);
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .video-call-panel {
+    padding: 14px;
+  }
+
+  .call-video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .call-video-card,
+  .call-video-card video {
+    min-height: 220px;
+  }
+
+  .call-controls {
+    gap: 8px;
+  }
+
+  .call-control,
+  .leave-call-button {
+    padding: 11px 13px;
+    font-size: 11px;
+  }
+}
+
+/* =================================
+   PICKDROP — CINEMATIC MEMBERS
+================================= */
+
+.members-panel,
+.online-users-section {
+  background: rgba(25, 16, 10, 0.72);
+  border: 1px solid rgba(255, 160, 75, 0.14);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.members-panel h2,
+.online-users-section h3 {
+  color: #fff0df;
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.members-list,
+.online-users-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.member-card,
+.online-user-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 210px;
+  padding: 15px 18px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 160, 75, 0.12);
+  border-radius: 15px;
+  transition: all 0.25s ease;
+}
+
+.member-card:hover,
+.online-user-card:hover {
+  background: rgba(255, 138, 50, 0.09);
+  border-color: rgba(255, 160, 75, 0.4);
+  transform: translateY(-3px);
+}
+
+.user-avatar {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #241307;
+  background: linear-gradient(135deg, #ffc078, #ff8735);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-details strong {
+  color: #fff1e3;
+  font-size: 14px;
+}
+
+.user-details span {
+  color: #bca996;
+  font-size: 11px;
+}
+
+.online-dot {
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #45d69a;
+  box-shadow: 0 0 10px rgba(69, 214, 154, 0.45);
+}
+
+@media (max-width: 600px) {
+  .members-panel,
+  .online-users-section {
+    padding: 17px;
+  }
+
+  .member-card,
+  .online-user-card {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* =================================
+   PICKDROP — CINEMATIC COLLAGE MAKER
+================================= */
+
+.collage-maker,
+.collage-container {
+  color: #fff0df;
+}
+
+.collage-maker h2,
+.collage-container h2 {
+  color: #fff0df;
+  font-family: var(--font-display);
+}
+
+.collage-maker button,
+.collage-container button {
+  border: 1px solid rgba(255, 160, 75, 0.25);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ffb568, #ff8735);
+  color: #211006;
+  padding: 11px 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.collage-maker button:hover,
+.collage-container button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 22px rgba(255, 138, 50, 0.22);
+}
+
+.collage-maker input,
+.collage-maker select,
+.collage-container input,
+.collage-container select {
+  background: rgba(255, 255, 255, 0.045);
+  color: #fff0df;
+  border: 1px solid rgba(255, 160, 75, 0.2);
+  border-radius: 10px;
+  padding: 10px 12px;
+  outline: none;
+}
+
+.collage-maker input:focus,
+.collage-maker select:focus,
+.collage-container input:focus,
+.collage-container select:focus {
+  border-color: #ffad55;
+  box-shadow: 0 0 0 3px rgba(255, 138, 50, 0.1);
+}
+
+.collage-maker .collage-preview,
+.collage-container .collage-preview {
+  background: rgba(15, 10, 7, 0.8);
+  border: 1px solid rgba(255, 160, 75, 0.18);
+  border-radius: 18px;
+  padding: 15px;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+.collage-maker img,
+.collage-container img {
+  border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+  .collage-maker,
+  .collage-container {
+    padding: 12px;
+  }
+
+  .collage-maker button,
+  .collage-container button {
+    width: 100%;
+  }
+}
+
+/* =================================
+   PICKDROP — CINEMATIC LOADING INTRO
+================================= */
+
+.loading-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #080604;
+  animation: introFadeOut 0.7s ease 1.5s forwards;
+}
+
+.intro-glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: rgba(255, 119, 35, 0.16);
+  filter: blur(100px);
+  animation: introGlow 2s ease-in-out infinite alternate;
+}
+
+.intro-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  animation: introReveal 1s ease both;
+}
+
+.intro-logo {
+  color: #fff4e9;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 8vw, 76px);
+  font-weight: 800;
+  letter-spacing: -4px;
+}
+
+.intro-logo span {
+  color: #ffad55;
+}
+
+.intro-logo i {
+  color: #ff7043;
+  font-style: normal;
+}
+
+.intro-content p {
+  margin-top: 12px;
+  color: #bba18a;
+  font-size: 10px;
+  letter-spacing: 5px;
+}
+
+.intro-loader {
+  width: 110px;
+  height: 2px;
+  margin: 35px auto 0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.intro-loader span {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: #ffad55;
+  box-shadow: 0 0 15px #ff8735;
+  animation: introLoading 1.3s ease-in-out infinite;
+}
+
+@keyframes introReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes introGlow {
+  from {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+@keyframes introLoading {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(280%); }
+}
+
+@keyframes introFadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* =================================
+   PICKDROP — PREMIUM MICRO ANIMATIONS
+================================= */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Smooth transitions */
+button,
+a,
+.option-card,
+.media-card,
+.member-card,
+.online-user-card,
+.room-tabs button,
+.room-tabs a {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+/* Button interaction */
+button:hover,
+.landing-card-btn:hover,
+.hero-explore-btn:hover {
+  transform: translateY(-3px);
+}
+
+/* Card interaction */
+.option-card:hover,
+.media-card:hover,
+.member-card:hover,
+.online-user-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 35px rgba(255, 138, 50, 0.12);
+}
+
+/* Image interaction */
+.media-card img {
+  transition: transform 0.45s ease;
+}
+
+.media-card:hover img {
+  transform: scale(1.035);
+}
+
+/* Room tab interaction */
+.room-tabs button:hover,
+.room-tabs a:hover {
+  color: #ffbd79;
+}
+
+/* Focus accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #ffad55;
+  outline-offset: 4px;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =================================
+   PICKDROP — RESPONSIVE POLISH
+================================= */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .landing-hero {
+    min-height: 85vh;
+    padding: 80px 6% 40px;
+  }
+
+  .home-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .room-header {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .room-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 600px) {
+  /* Navigation */
+  .navbar {
+    padding: 12px 4%;
+    min-height: 64px;
+  }
+
+  .navbar .logo {
+    font-size: 19px;
+  }
+
+  .navbar .nav-links {
+    gap: 5px;
+  }
+
+  .navbar .nav-links .nav-button {
+    padding: 8px 9px;
+    font-size: 10px;
+  }
+
+  /* Homepage */
+  .landing-hero {
+    min-height: 78vh;
+    padding: 65px 6% 30px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(38px, 11vw, 55px);
+    line-height: 1.12;
+  }
+
+  .hero-content p {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .hero-bottom {
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 9px;
+  }
+
+  .landing-options {
+    padding: 65px 5%;
+  }
+
+  .home-options {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .option-card {
+    padding: 25px 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 30px;
+  }
+
+  /* Room dashboard */
+  .room-page {
+    padding: 18px 4%;
+  }
+
+  .room-heading h1 {
+    font-size: 29px;
+  }
+
+  .room-header-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .room-code {
+    width: 100%;
+  }
+
+  .home-button {
+    width: 100%;
+  }
+
+  .room-tabs {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 8px;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+  }
+
+  .room-tabs button {
+    flex-shrink: 0;
+  }
+
+  .room-content {
+    padding: 14px 0;
+  }
+
+  /* Gallery */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  /* Chat */
+  .chat-messages {
+    min-height: 300px;
+    max-height: 55vh;
+  }
+
+  .chat-input-area {
+    flex-wrap: wrap;
+  }
+
+  /* Video call */
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-card {
+    min-height: 220px;
+  }
+
+  /* Members */
+  .members-list,
+  .online-users-list {
+    flex-direction: column;
+  }
+
+  /* Footer */
+  .landing-footer {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .navbar .logo {
+    font-size: 17px;
+  }
+
+  .navbar .nav-links .nav-button {
+    padding: 7px;
+    font-size: 9px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .room-heading h1 {
+    font-size: 25px;
+  }
+}
+
+/* =================================
+   PICKDROP — SLOW CINEMATIC REVEAL
+================================= */
+
+.landing-hero .hero-glow {
+  animation: slowHeroGlow 5s ease-in-out both;
+}
+
+.landing-hero .hero-label {
+  animation: slowTextReveal 1.8s ease both;
+  animation-delay: 0.8s;
+}
+
+.landing-hero .hero-content h1 {
+  animation: slowTextReveal 2s ease both;
+  animation-delay: 1.2s;
+}
+
+.landing-hero .hero-content p {
+  animation: slowTextReveal 2s ease both;
+  animation-delay: 1.9s;
+}
+
+.landing-hero .hero-explore-btn {
+  animation: slowTextReveal 2s ease both;
+  animation-delay: 2.5s;
+}
+
+.landing-hero .hero-bottom {
+  animation: slowTextReveal 2s ease both;
+  animation-delay: 2.8s;
+}
+
+@keyframes slowTextReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes slowHeroGlow {
+  from {
+    opacity: 0;
+    transform: scale(0.75);
+    filter: blur(100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+    filter: blur(80px);
+  }
+}
+
+/* Slower intro reveal */
+.loading-intro {
+  animation: introFadeOut 1.4s ease 2.8s forwards;
+}
+
+.intro-content {
+  animation: introReveal 2.2s ease both;
+}
+
+.intro-glow {
+  animation: introGlow 4s ease-in-out infinite alternate;
+}
+
+.intro-loader span {
+  animation-duration: 2.2s;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .landing-hero *,
+  .loading-intro *,
+  .loading-intro {
+    animation: none !important;
+    filter: none !important;
+  }
+}
