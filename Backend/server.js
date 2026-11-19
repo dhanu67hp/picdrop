@@ -10,7 +10,7 @@ const path = require("path");
 const app = express();
 const server = http.createServer(app);
 
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 // SOCKET.IO CONFIGURATION
 const io = new Server(server, {
